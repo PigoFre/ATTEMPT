@@ -54,28 +54,22 @@
     <script type="module">
         import { tick, run, loadRom } from "./src/script.js";
         
-        document.getElementById("step").addEventListener("click", () => tick());
-        document.getElementById("run").addEventListener("click", () => run());
-        document.getElementById("loadRom").addEventListener('click', () => {
-            document.getElementById('rom').click()
-        });
-
-        let romLoader = document.getElementById('rom');
-
-    
-        romLoader.onchange = function () {
-            let file = this.files[0];21
-            let reader = new FileReader(); // no arguments
-            let view = null;
-            reader.readAsArrayBuffer(file);
-
-            console.log("file loaded");
-            reader.onloadend = () => {
-                view = new Uint8Array(reader.result);
-                loadRom(view);
-            }
-        }
-
+       document.getElementById("step").addEventListener("click", () => tick());
+document.getElementById("run").addEventListener("click", () => run());
+document.getElementById("loadRom").addEventListener('click', () => {
+  document.getElementById('rom').click();
+});
+let romLoader = document.getElementById('rom');
+romLoader.onchange = function () {
+  let filePath = "roms/pokemon_yellow.gb"; // update with your ROM file name and path
+  fetch(filePath)
+    .then(response => response.arrayBuffer())
+    .then(buffer => {
+      let view = new Uint8Array(buffer);
+      loadRom(view);
+    })
+    .catch(error => console.log(error));
+}
     </script>
 </body>
 
