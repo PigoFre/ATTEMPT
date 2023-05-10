@@ -61,7 +61,7 @@ document.getElementById("loadRom").addEventListener('click', () => {
 });
 let romLoader = document.getElementById('rom');
 romLoader.onchange = function () {
-  let filePath = "roms/pokemon_yellow.gb"; // update with your ROM file name and path
+  let filePath = "roms/pokemonrom"; // update with your ROM file name and path
   fetch(filePath)
     .then(response => response.arrayBuffer())
     .then(buffer => {
